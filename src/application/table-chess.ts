@@ -87,8 +87,8 @@ export class TableChess {
     switch (piece.name) {
       case ChessPieceName.KING:
         return await this.checkValidKingMoves(x, y);
-    //   case ChessPieceName.QUEEN:
-    //     return this.checkValidQueenMoves(x, y);
+      case ChessPieceName.QUEEN:
+        return this.checkValidQueenMoves(x, y);
     //   case ChessPieceName.ROOK:
     //     return this.checkValidRookMoves(x, y);
     //   case ChessPieceName.BISHOP:
@@ -104,76 +104,69 @@ export class TableChess {
   async checkValidKingMoves(x: number, y: number) {
     //const piece = this.getPiece(x, y);
     const validMoves = [];
-    if (this.isPlaceEmpty(x + 1, y)) validMoves.push([x + 1, y]);
-    if (this.isPlaceEmpty(x - 1, y)) validMoves.push([x - 1, y]);
-    if (this.isPlaceEmpty(x, y + 1)) validMoves.push([x, y + 1]);
-    if (this.isPlaceEmpty(x, y - 1)) validMoves.push([x, y - 1]);
-    if (this.isPlaceEmpty(x + 1, y + 1)) validMoves.push([x + 1, y + 1]);
-    if (this.isPlaceEmpty(x - 1, y - 1)) validMoves.push([x - 1, y - 1]);
-    if (this.isPlaceEmpty(x + 1, y - 1)) validMoves.push([x + 1, y - 1]);
-    if (this.isPlaceEmpty(x - 1, y + 1)) validMoves.push([x - 1, y + 1]);
+    console.log((this.isPlaceEmpty(x + 1, y)))
+    console.log(this.isPlaceEmpty(x - 1, y)) ;
+    console.log(this.isPlaceEmpty(x, y + 1)) ;
+    console.log(this.isPlaceEmpty(x, y - 1)) ;
+    console.log(this.isPlaceEmpty(x + 1, y + 1));
+    console.log(this.isPlaceEmpty(x - 1, y - 1));
+    console.log(this.isPlaceEmpty(x + 1, y - 1));
+    console.log(this.isPlaceEmpty(x - 1, y + 1));
     console.log(validMoves)
     return validMoves;
   }
     checkValidQueenMoves(x: number, y: number) {
     //const piece = this.getPiece(x, y);
-    const validMoves = [];
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x + i, y)) validMoves.push([x + i, y]);
-        else break;
-        }
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x - i, y)) validMoves.push([x - i, y]);
-        else break;
-        }
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x, y + i)) validMoves.push([x, y + i]);
-        else break;
-        }
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x, y - i)) validMoves.push([x, y - i]);
-        else break;
-        }
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x + i, y + i)) validMoves.push([x + i, y + i]);
-        else break;
-        }
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x - i, y - i)) validMoves.push([x - i, y - i]);
-        else break;
-        }
-    for (let i = 1; i < 8; i++) {
-
-        if (this.isPlaceEmpty(x + i, y - i)) validMoves.push([x + i, y - i]);
-        else break;
-        }
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x - i, y + i)) validMoves.push([x - i, y + i]);
-        else break;
-        }
-    return validMoves;
+    let moves = [];
+    // check vertical
+    for (let i = x-1; i >=0; i--){
+        if (this.table[i][y].name===ChessPieceName.EMPTY) {
+            moves.push([i, y]);
+        } else break
     }
-
-    checkValidRookMoves(x: number, y: number) {
-    const piece = this.getPiece(x, y);
-    const validMoves = [];
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x + i, y)) validMoves.push([x + i, y]);
-        else break;
-        }
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x - i, y)) validMoves.push([x - i, y]);
-        else break;
-        }
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x, y + i)) validMoves.push([x, y + i]);
-        else break;
-        }
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x, y - i)) validMoves.push([x, y - i]);
-        else break;
-        }
-    return validMoves;
+    //down
+    for (let i = x+1; i <8; i++){
+        if (this.table[i][y].name===ChessPieceName.EMPTY) {
+            moves.push([i, y]);
+        } else break
+    }
+    // check horizontal
+    //left
+    for (let i = y-1; i >=0; i--){
+        if (this.table[x][i].name===ChessPieceName.EMPTY) {
+            moves.push([x, i]);
+        } else break
+    }
+    //right
+    for (let i = y+1; i < 8; i++){
+        if (this.table[x][i].name===ChessPieceName.EMPTY) {
+            moves.push([x, i]);
+        } else break
+    }
+    // check diagonal moves
+    //up left
+    for (let i = x-1, j = y-1; i >= 0 && j >=0; i--, j--) {
+         if (this.table[i][j].name===ChessPieceName.EMPTY) {
+             moves.push([i, j]);
+         } else break
+     }
+    //down right
+    for (let i = x+1, j = y+1; i <8 && j <8; i++, j++) {
+        if (this.table[i][j].name===ChessPieceName.EMPTY) {
+            moves.push([i, j]);
+        } else break
+    }
+    for (let i = x-1, j = y+1; i >= 0 && j < 8; i--, j++) {
+        if (this.table[i][j].name===ChessPieceName.EMPTY) {
+            moves.push([i, j]);
+        } else break
+    }
+    for (let i = x+1, j = y-1; i < 8 && j >= 0; i++, j--) {
+        if (this.table[i][j].name===ChessPieceName.EMPTY) {
+            moves.push([i, j]);
+        } else break
+    }
+    return moves;
     }
 
     checkValidBishopMoves(x: number, y: number) {

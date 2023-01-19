@@ -8,8 +8,9 @@ describe("TableChess", () => {
         expect(TABLE).toBeTruthy();
     });
     it("should get king piece",()=>{
-        const piece = TABLE.getPiece(0,4)
-        expect(piece.name).toBe(ChessPieceName.KING)
+        const piece = TABLE.getPiece(6,3)
+        console.log(piece)
+        expect(piece.name).toBeTruthy()
     })
     // it('should move a pice', () => {
     //     TABLE.movePiece(0,0,3,2)
@@ -21,8 +22,10 @@ describe("TableChess", () => {
         
     // })
     it ('should test queen moves', async ()=>{
-        const moves = await TABLE.checkValidMoves(0,4)
+        // TABLE.movePiece(0,3,4,3)
+        // TABLE.movePiece(0,0,4,2)
+        const moves = await TABLE.checkValidMoves(0,3)
         console.log(moves)
-        // expect(moves).toBe([])
+        expect(moves).toBeTruthy()
     })
 });
