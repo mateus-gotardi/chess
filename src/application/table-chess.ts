@@ -74,7 +74,7 @@ export class TableChess {
   }
 
   isPlaceEmpty(x: number, y: number) {
-    return this.getPiece(x, y).name === ChessPieceName.EMPTY;
+    return this.table[x][y].name === ChessPieceName.EMPTY;
   }
 
   isPieceEnemy(x: number, y: number, piece: ChessPiece) {
@@ -82,116 +82,217 @@ export class TableChess {
       return this.getPiece(x, y).color !== piece.color;
     else return false;
   }
-  async checkValidMoves(x: number, y: number) {
+  checkValidMoves(x: number, y: number) {
     const piece = this.getPiece(x, y);
     switch (piece.name) {
       case ChessPieceName.KING:
-        return await this.checkValidKingMoves(x, y);
+        return this.checkValidKingMoves(x, y);
       case ChessPieceName.QUEEN:
         return this.checkValidQueenMoves(x, y);
-    //   case ChessPieceName.ROOK:
-    //     return this.checkValidRookMoves(x, y);
-    //   case ChessPieceName.BISHOP:
-    //     return this.checkValidBishopMoves(x, y);
-    //   case ChessPieceName.KNIGHT:
-    //     return this.checkValidKnightMoves(x, y);
-    //   case ChessPieceName.PAWN:
-    //     return this.checkValidPawnMoves(x, y);
-       default:
+      case ChessPieceName.ROOK:
+        return this.checkValidRookMoves(x, y);
+      case ChessPieceName.BISHOP:
+        return this.checkValidBishopMoves(x, y);
+      case ChessPieceName.KNIGHT:
+        return this.checkValidKnightMoves(x, y);
+      case ChessPieceName.PAWN:
+        return this.checkValidPawnMoves(x, y);
+      case ChessPieceName.EMPTY:
+        return [];
+      default:
         return [];
     }
   }
-  async checkValidKingMoves(x: number, y: number) {
+  checkValidKingMoves(x: number, y: number) {
     //const piece = this.getPiece(x, y);
     const validMoves = [];
-    console.log((this.isPlaceEmpty(x + 1, y)))
-    console.log(this.isPlaceEmpty(x - 1, y)) ;
-    console.log(this.isPlaceEmpty(x, y + 1)) ;
-    console.log(this.isPlaceEmpty(x, y - 1)) ;
-    console.log(this.isPlaceEmpty(x + 1, y + 1));
-    console.log(this.isPlaceEmpty(x - 1, y - 1));
-    console.log(this.isPlaceEmpty(x + 1, y - 1));
-    console.log(this.isPlaceEmpty(x - 1, y + 1));
-    console.log(validMoves)
+
     return validMoves;
   }
-    checkValidQueenMoves(x: number, y: number) {
-    //const piece = this.getPiece(x, y);
+  checkValidQueenMoves(x: number, y: number) {
+    const piece = this.getPiece(x, y);
     let moves = [];
     // check vertical
-    for (let i = x-1; i >=0; i--){
-        if (this.table[i][y].name===ChessPieceName.EMPTY) {
-            moves.push([i, y]);
-        } else break
+    for (let i = x - 1; i >= 0; i--) {
+      if (this.table[i][y].name === ChessPieceName.EMPTY) {
+        moves.push([i, y]);
+      } else {
+        if (this.isPieceEnemy(i, y, piece)) {
+          moves.push([i, y]);
+        }
+        break
+      }
     }
-    //down
-    for (let i = x+1; i <8; i++){
-        if (this.table[i][y].name===ChessPieceName.EMPTY) {
-            moves.push([i, y]);
-        } else break
+    for (let i = x + 1; i < 8; i++) {
+      if (this.table[i][y].name === ChessPieceName.EMPTY) {
+        moves.push([i, y]);
+      } else {
+        if (this.isPieceEnemy(i, y, piece)) {
+          moves.push([i, y]);
+        }
+        break
+      }
     }
     // check horizontal
-    //left
-    for (let i = y-1; i >=0; i--){
-        if (this.table[x][i].name===ChessPieceName.EMPTY) {
-            moves.push([x, i]);
-        } else break
+    for (let i = y - 1; i >= 0; i--) {
+      if (this.table[x][i].name === ChessPieceName.EMPTY) {
+        moves.push([x, i]);
+      } else {
+        if (this.isPieceEnemy(x, i, piece)) {
+          moves.push([x, i]);
+        }
+        break
+      }
     }
-    //right
-    for (let i = y+1; i < 8; i++){
-        if (this.table[x][i].name===ChessPieceName.EMPTY) {
-            moves.push([x, i]);
-        } else break
+    for (let i = y + 1; i < 8; i++) {
+      if (this.table[x][i].name === ChessPieceName.EMPTY) {
+        moves.push([x, i]);
+      } else {
+        if (this.isPieceEnemy(x, i, piece)) {
+          moves.push([x, i]);
+        }
+        break
+      }
     }
     // check diagonal moves
-    //up left
-    for (let i = x-1, j = y-1; i >= 0 && j >=0; i--, j--) {
-         if (this.table[i][j].name===ChessPieceName.EMPTY) {
-             moves.push([i, j]);
-         } else break
-     }
-    //down right
-    for (let i = x+1, j = y+1; i <8 && j <8; i++, j++) {
-        if (this.table[i][j].name===ChessPieceName.EMPTY) {
-            moves.push([i, j]);
-        } else break
+    for (let i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--) {
+      if (this.table[i][j].name === ChessPieceName.EMPTY) {
+        moves.push([i, j]);
+      } else {
+        if (this.isPieceEnemy(i, j, piece)) {
+          moves.push([i, j]);
+        }
+        break
+      }
     }
-    for (let i = x-1, j = y+1; i >= 0 && j < 8; i--, j++) {
-        if (this.table[i][j].name===ChessPieceName.EMPTY) {
-            moves.push([i, j]);
-        } else break
+    for (let i = x + 1, j = y + 1; i < 8 && j < 8; i++, j++) {
+      if (this.table[i][j].name === ChessPieceName.EMPTY) {
+        moves.push([i, j]);
+      } else {
+        if (this.isPieceEnemy(i, j, piece)) {
+          moves.push([i, j]);
+        }
+        break
+      }
     }
-    for (let i = x+1, j = y-1; i < 8 && j >= 0; i++, j--) {
-        if (this.table[i][j].name===ChessPieceName.EMPTY) {
-            moves.push([i, j]);
-        } else break
+    for (let i = x - 1, j = y + 1; i >= 0 && j < 8; i--, j++) {
+      if (this.table[i][j].name === ChessPieceName.EMPTY) {
+        moves.push([i, j]);
+      } else {
+        if (this.isPieceEnemy(i, j, piece)) {
+          moves.push([i, j]);
+        }
+        break
+      }
+    }
+    for (let i = x + 1, j = y - 1; i < 8 && j >= 0; i++, j--) {
+      if (this.table[i][j].name === ChessPieceName.EMPTY) {
+        moves.push([i, j]);
+      } else {
+        if (this.isPieceEnemy(i, j, piece)) {
+          moves.push([i, j]);
+        }
+        break
+      }
     }
     return moves;
-    }
-
-    checkValidBishopMoves(x: number, y: number) {
+  }
+  checkValidRookMoves(x: number, y: number) {
     const piece = this.getPiece(x, y);
-    const validMoves = [];
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x + i, y + i)) validMoves.push([x + i, y + i]);
-        else break;
+    let moves = [];
+    // check vertical
+    for (let i = x - 1; i >= 0; i--) {
+      if (this.table[i][y].name === ChessPieceName.EMPTY) {
+        moves.push([i, y]);
+      } else {
+        if (this.isPieceEnemy(i, y, piece)) {
+          moves.push([i, y]);
         }
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x - i, y - i)) validMoves.push([x - i, y - i]);
-        else break;
-        }
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x + i, y - i)) validMoves.push([x + i, y - i]);
-        else break;
-        }
-    for (let i = 1; i < 8; i++) {
-        if (this.isPlaceEmpty(x - i, y + i)) validMoves.push([x - i, y + i]);
-        else break;
-        }
-    return validMoves;
+        break
+      }
     }
+    for (let i = x + 1; i < 8; i++) {
+      if (this.table[i][y].name === ChessPieceName.EMPTY) {
+        moves.push([i, y]);
+      } else {
+        if (this.isPieceEnemy(i, y, piece)) {
+          moves.push([i, y]);
+        }
+        break
+      }
+    }
+    // check horizontal
+    for (let i = y - 1; i >= 0; i--) {
+      if (this.table[x][i].name === ChessPieceName.EMPTY) {
+        moves.push([x, i]);
+      } else {
+        if (this.isPieceEnemy(x, i, piece)) {
+          moves.push([x, i]);
+        }
+        break
+      }
+    }
+    for (let i = y + 1; i < 8; i++) {
+      if (this.table[x][i].name === ChessPieceName.EMPTY) {
+        moves.push([x, i]);
+      } else {
+        if (this.isPieceEnemy(x, i, piece)) {
+          moves.push([x, i]);
+        }
+        break
+      }
+    }
+    return moves;
+  }
 
-    checkValidKnightMoves(x: number, y: number) {
+  checkValidBishopMoves(x: number, y: number) {
+    const piece = this.getPiece(x, y);
+    let moves = [];
+    // check diagonal moves
+    for (let i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--) {
+      if (this.table[i][j].name === ChessPieceName.EMPTY) {
+        moves.push([i, j]);
+      } else {
+        if (this.isPieceEnemy(i, j, piece)) {
+          moves.push([i, j]);
+        }
+        break
+      }
+    }
+    for (let i = x + 1, j = y + 1; i < 8 && j < 8; i++, j++) {
+      if (this.table[i][j].name === ChessPieceName.EMPTY) {
+        moves.push([i, j]);
+      } else {
+        if (this.isPieceEnemy(i, j, piece)) {
+          moves.push([i, j]);
+        }
+        break
+      }
+    }
+    for (let i = x - 1, j = y + 1; i >= 0 && j < 8; i--, j++) {
+      if (this.table[i][j].name === ChessPieceName.EMPTY) {
+        moves.push([i, j]);
+      } else {
+        if (this.isPieceEnemy(i, j, piece)) {
+          moves.push([i, j]);
+        }
+        break
+      }
+    }
+    for (let i = x + 1, j = y - 1; i < 8 && j >= 0; i++, j--) {
+      if (this.table[i][j].name === ChessPieceName.EMPTY) {
+        moves.push([i, j]);
+      } else {
+        if (this.isPieceEnemy(i, j, piece)) {
+          moves.push([i, j]);
+        }
+        break
+      }
+    }
+    return moves;
+  }
+
+  checkValidKnightMoves(x: number, y: number) {
     const piece = this.getPiece(x, y);
     const validMoves = [];
     if (this.isPlaceEmpty(x + 1, y + 2)) validMoves.push([x + 1, y + 2]);
@@ -203,25 +304,25 @@ export class TableChess {
     if (this.isPlaceEmpty(x - 2, y + 1)) validMoves.push([x - 2, y + 1]);
     if (this.isPlaceEmpty(x - 2, y - 1)) validMoves.push([x - 2, y - 1]);
     return validMoves;
-    }
+  }
 
-    checkValidPawnMoves(x: number, y: number) {
+  checkValidPawnMoves(x: number, y: number) {
     const piece = this.getPiece(x, y);
     const validMoves = [];
     if (piece.color === ChessPieceColor.WHITE) {
-        if (this.isPlaceEmpty(x, y + 1)) validMoves.push([x, y + 1]);
-        if (y === 1 && this.isPlaceEmpty(x, y + 2)) validMoves.push([x, y + 2]);
-        if (this.isPieceEnemy(x + 1, y + 1, piece)) validMoves.push([x + 1, y + 1]);
-        if (this.isPieceEnemy(x - 1, y + 1, piece)) validMoves.push([x - 1, y + 1]);
-        }
-    else {
-        if (this.isPlaceEmpty(x, y - 1)) validMoves.push([x, y - 1]);
-        if (y === 6 && this.isPlaceEmpty(x, y - 2)) validMoves.push([x, y - 2]);
-        if (this.isPieceEnemy(x + 1, y - 1, piece)) validMoves.push([x + 1, y - 1]);
-        if (this.isPieceEnemy(x - 1, y - 1, piece)) validMoves.push([x - 1, y - 1]);
-        }
-    return validMoves;
+      if (this.isPlaceEmpty(x, y + 1)) validMoves.push([x, y + 1]);
+      if (y === 1 && this.isPlaceEmpty(x, y + 2)) validMoves.push([x, y + 2]);
+      if (this.isPieceEnemy(x + 1, y + 1, piece)) validMoves.push([x + 1, y + 1]);
+      if (this.isPieceEnemy(x - 1, y + 1, piece)) validMoves.push([x - 1, y + 1]);
     }
+    else {
+      if (this.isPlaceEmpty(x, y - 1)) validMoves.push([x, y - 1]);
+      if (y === 6 && this.isPlaceEmpty(x, y - 2)) validMoves.push([x, y - 2]);
+      if (this.isPieceEnemy(x + 1, y - 1, piece)) validMoves.push([x + 1, y - 1]);
+      if (this.isPieceEnemy(x - 1, y - 1, piece)) validMoves.push([x - 1, y - 1]);
+    }
+    return validMoves;
+  }
 }
 
 export function NewTable() {
