@@ -23,8 +23,8 @@ describe("TableChess", () => {
 
     // })
     it('should test queen moves', () => {
-        TABLE.movePiece(0, 3, 4, 3)
-        TABLE.movePiece(0, 0, 4, 2)
+        TABLE.movePieceForTests(0, 3, 4, 3)
+        TABLE.movePieceForTests(0, 0, 4, 2)
         const moves = TABLE.checkValidMoves(4, 3)
         expect(moves).toBeTruthy()
     })
