@@ -3,10 +3,13 @@ export class TableChess {
   table: Array<Array<ChessPiece>>;
   deadPieces: Array<ChessPiece>;
   turn: ChessPieceColor;
+  gameMoves: Array<Array<number>>;
+
   constructor(table: Array<Array<ChessPiece>>) {
     this.table = table;
     this.deadPieces = [];
     this.turn = ChessPieceColor.WHITE;
+    this.gameMoves = [];
   }
 
   getTurn() {
@@ -28,8 +31,9 @@ export class TableChess {
     this.table[x][y] = piece;
   }
 
-  afterMove() {
+  afterMove(x: number, y: number, newX: number, newY: number) {
     this.turn = this.turn === ChessPieceColor.WHITE ? ChessPieceColor.BLACK : ChessPieceColor.WHITE;
+    this.gameMoves.push([x, y, newX, newY]);
   }
 
   movePiece(x: number, y: number, newX: number, newY: number) {
@@ -39,6 +43,9 @@ export class TableChess {
       const finalPlace = this.getPiece(newX, newY);
       if (finalPlace.color !== ChessPieceColor.NULL) {
         this.deadPieces.push(finalPlace);
+      } else if (piece.name === ChessPieceName.PAWN && this.getPiece(x, newY).name === ChessPieceName.PAWN && this.isPieceEnemy(x, newY, piece)) {
+        this.deadPieces.push(this.getPiece(x, newY));
+        this.setPiece(x, newY, new ChessPiece({ name: ChessPieceName.EMPTY, color: ChessPieceColor.NULL, isAttacked: false }));
       }
       this.setPiece(newX, newY, piece);
       this.setPiece(
@@ -50,7 +57,7 @@ export class TableChess {
           isAttacked: false,
         }),
       );
-      this.afterMove();
+      this.afterMove(x, y, newX, newY);
     }
   }
 
@@ -147,6 +154,7 @@ export class TableChess {
   checkValidKingMoves(x: number, y: number) {
     const piece = this.getPiece(x, y);
     let moves = [];
+
 
     if (this.isPlaceEmpty(x + 1, y) && !this.isEnemyKingAround(x + 1, y, piece)) moves.push([x + 1, y])
     if (this.isPlaceEmpty(x - 1, y) && !this.isEnemyKingAround(x - 1, y, piece)) moves.push([x - 1, y])
@@ -362,16 +370,48 @@ export class TableChess {
     if (piece.color === ChessPieceColor.WHITE) {
       if (this.isPlaceEmpty(x + 1, y)) validMoves.push([x + 1, y]);
       if (x === 1 && this.isPlaceEmpty(x + 2, y)) validMoves.push([x + 2, y]);
+
       if (this.isPieceEnemy(x + 1, y + 1, piece)) validMoves.push([x + 1, y + 1]);
+      else if (this.gameMoves.length > 0 &&
+        this.gameMoves[this.gameMoves.length - 1][0] == x + 2 &&
+        this.gameMoves[this.gameMoves.length - 1][1] == y + 1 &&
+        this.gameMoves[this.gameMoves.length - 1][2] == x &&
+        this.gameMoves[this.gameMoves.length - 1][3] == y + 1 &&
+        this.getPiece(x, y + 1).name === ChessPieceName.PAWN &&
+        this.getPiece(x, y + 1).color === ChessPieceColor.BLACK) validMoves.push([x + 1, y + 1]);
+
       if (this.isPieceEnemy(x + 1, y - 1, piece)) validMoves.push([x + 1, y - 1]);
+      else if (this.gameMoves.length > 0 &&
+        this.gameMoves[this.gameMoves.length - 1][0] == x + 2 &&
+        this.gameMoves[this.gameMoves.length - 1][1] == y - 1 &&
+        this.gameMoves[this.gameMoves.length - 1][2] == x &&
+        this.gameMoves[this.gameMoves.length - 1][3] == y - 1 &&
+        this.getPiece(x, y + 1).name === ChessPieceName.PAWN &&
+        this.getPiece(x, y + 1).color === ChessPieceColor.BLACK) validMoves.push([x + 1, y - 1]);
     }
     else {
       if (this.isPlaceEmpty(x - 1, y)) validMoves.push([x - 1, y]);
       if (x === 6 && this.isPlaceEmpty(x - 2, y)) validMoves.push([x - 2, y]);
       if (this.isPieceEnemy(x - 1, y + 1, piece)) validMoves.push([x - 1, y + 1]);
-      if (this.isPieceEnemy(x - 1, y - 1, piece)) validMoves.push([x - 1, y - 1]);
-    }
 
+      else if (this.gameMoves.length > 0 &&
+        this.gameMoves[this.gameMoves.length - 1][0] == x - 2 &&
+        this.gameMoves[this.gameMoves.length - 1][1] == y + 1 &&
+        this.gameMoves[this.gameMoves.length - 1][2] == x &&
+        this.gameMoves[this.gameMoves.length - 1][3] == y + 1 &&
+        this.getPiece(x, y + 1).name === ChessPieceName.PAWN &&
+        this.getPiece(x, y + 1).color === ChessPieceColor.WHITE) validMoves.push([x - 1, y + 1]);
+
+      if (this.isPieceEnemy(x - 1, y - 1, piece)) validMoves.push([x - 1, y - 1]);
+
+      else if (this.gameMoves.length > 0 &&
+        this.gameMoves[this.gameMoves.length - 1][0] == x - 2 &&
+        this.gameMoves[this.gameMoves.length - 1][1] == y - 1 &&
+        this.gameMoves[this.gameMoves.length - 1][2] == x &&
+        this.gameMoves[this.gameMoves.length - 1][3] == y - 1 &&
+        this.getPiece(x, y - 1).name === ChessPieceName.PAWN &&
+        this.getPiece(x, y - 1).color === ChessPieceColor.WHITE) validMoves.push([x - 1, y - 1]);
+    }
     return validMoves;
   }
 }
