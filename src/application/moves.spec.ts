@@ -69,7 +69,7 @@ describe('test valid moves of all pieces at the beginning', ()=>{
 })
 
 
-describe('test moves of the pieces', () => {
+describe('test some moves of the pieces', () => {
     it('should test some moves with turns', () => {
         expect(TABLE.getTurn()).toEqual(ChessPieceColor.WHITE)
         TABLE.movePiece(1, 2, 3, 2)
@@ -114,5 +114,6 @@ describe('test moves of the pieces', () => {
         expect(TABLE.getPiece(2, 1).name).toEqual(ChessPieceName.PAWN)
         expect(TABLE.getPiece(3, 1).name).toEqual(ChessPieceName.EMPTY)
         expect(TABLE.getPiece(3, 2).name).toEqual(ChessPieceName.EMPTY)
+        expect(TABLE.getDeadPieces().length).toEqual(2)
     })
 })
