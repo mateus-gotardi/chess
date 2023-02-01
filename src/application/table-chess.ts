@@ -24,29 +24,50 @@ export class TableChess {
   }
 
   getPiece(x: number, y: number): ChessPiece {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
     return this.table[x][y];
   }
 
   setPiece(x: number, y: number, piece: ChessPiece) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
     this.table[x][y] = piece;
   }
 
   afterMove(x: number, y: number, newX: number, newY: number) {
-    this.turn = this.turn === ChessPieceColor.WHITE ? ChessPieceColor.BLACK : ChessPieceColor.WHITE;
+    if (this.turn === ChessPieceColor.WHITE) {
+      this.turn = ChessPieceColor.BLACK;
+    } else {
+      this.turn = ChessPieceColor.WHITE;
+    }
+    
     this.gameMoves.push([x, y, newX, newY]);
   }
 
   movePiece(x: number, y: number, newX: number, newY: number) {
     const piece = this.getPiece(x, y);
     const validMoves = this.checkValidMoves(x, y);
-    if (piece.color == this.turn && validMoves.filter((move) => move[0] === newX && move[1] === newY).length > 0) {
+    if (piece.color === this.turn && validMoves.filter((move) => move[0] === newX && move[1] === newY).length > 0) {
       const finalPlace = this.getPiece(newX, newY);
+      //adds dead piece to cemetery 
       if (finalPlace.color !== ChessPieceColor.NULL) {
         this.deadPieces.push(finalPlace);
-      } else if (piece.name === ChessPieceName.PAWN && this.getPiece(x, newY).name === ChessPieceName.PAWN && this.isPieceEnemy(x, newY, piece)) {
-        this.deadPieces.push(this.getPiece(x, newY));
-        this.setPiece(x, newY, new ChessPiece({ name: ChessPieceName.EMPTY, color: ChessPieceColor.NULL, isAttacked: false }));
       }
+      //en passant
+      else if (piece.name === ChessPieceName.PAWN && this.getPiece(x, newY).name === ChessPieceName.PAWN && this.isPieceEnemy(x, newY, piece)) {
+        this.deadPieces.push(this.getPiece(x, newY));
+        this.setPiece(x, newY, new ChessPiece({ name: ChessPieceName.EMPTY, color: ChessPieceColor.NULL, isAttacked: false, isMoved: false }));
+      }
+      //castling
+      if (piece.name === ChessPieceName.KING && newY === y + 2) {
+        this.setPiece(x, y + 3, new ChessPiece({ name: ChessPieceName.EMPTY, color: ChessPieceColor.NULL, isAttacked: false, isMoved: false }));
+        this.setPiece(x, y + 1, new ChessPiece({ name: ChessPieceName.ROOK, color: piece.color, isAttacked: false, isMoved: true }));
+      } else if (piece.name === ChessPieceName.KING && newY === y - 2) {
+        this.setPiece(x, y - 4, new ChessPiece({ name: ChessPieceName.EMPTY, color: ChessPieceColor.NULL, isAttacked: false, isMoved: false }));
+        this.setPiece(x, y - 1, new ChessPiece({ name: ChessPieceName.ROOK, color: piece.color, isAttacked: false, isMoved: true }));
+      }
+      //sets piece as moved
+      if (!piece.isMoved) { piece.isMoved = true };
+  
       this.setPiece(newX, newY, piece);
       this.setPiece(
         x,
@@ -55,45 +76,61 @@ export class TableChess {
           name: ChessPieceName.EMPTY,
           color: ChessPieceColor.NULL,
           isAttacked: false,
+          isMoved: false
         }),
       );
+      // register move and change turn
       this.afterMove(x, y, newX, newY);
     }
   }
 
   isPieceAttacked(x: number, y: number) {
-    return this.getPiece(x, y);
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
+    return this.getPiece(x, y).isAttacked;
+  }
+
+  isPieceMoved(x: number, y: number) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
+    return this.getPiece(x, y).isMoved;
   }
 
   isPieceWhite(x: number, y: number) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
     return this.getPiece(x, y).color === ChessPieceColor.WHITE;
   }
 
   isPieceBlack(x: number, y: number) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
     return this.getPiece(x, y).color === ChessPieceColor.BLACK;
   }
 
   isPieceKing(x: number, y: number) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
     return this.getPiece(x, y).name === ChessPieceName.KING;
   }
 
   isPieceQueen(x: number, y: number) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
     return this.getPiece(x, y).name === ChessPieceName.QUEEN;
   }
 
   isPieceRook(x: number, y: number) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
     return this.getPiece(x, y).name === ChessPieceName.ROOK;
   }
 
   isPieceBishop(x: number, y: number) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
     return this.getPiece(x, y).name === ChessPieceName.BISHOP;
   }
 
   isPieceKnight(x: number, y: number) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
     return this.getPiece(x, y).name === ChessPieceName.KNIGHT;
   }
 
   isPiecePawn(x: number, y: number) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
     return this.getPiece(x, y).name === ChessPieceName.PAWN;
   }
 
@@ -113,6 +150,7 @@ export class TableChess {
 
   }
   checkValidMoves(x: number, y: number) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return;
     const piece = this.getPiece(x, y);
     switch (piece.name) {
       case ChessPieceName.KING:
@@ -137,6 +175,7 @@ export class TableChess {
 
   }
   isEnemyKingAround(x: number, y: number, piece: ChessPiece) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) return true;
     let isKing = false
     if (this.isPieceKing(x + 1, y) && this.isPieceEnemy(x + 1, y, piece) ||
       this.isPieceKing(x - 1, y) && this.isPieceEnemy(x - 1, y, piece) ||
@@ -154,8 +193,6 @@ export class TableChess {
   checkValidKingMoves(x: number, y: number) {
     const piece = this.getPiece(x, y);
     let moves = [];
-
-
     if (this.isPlaceEmpty(x + 1, y) && !this.isEnemyKingAround(x + 1, y, piece)) moves.push([x + 1, y])
     if (this.isPlaceEmpty(x - 1, y) && !this.isEnemyKingAround(x - 1, y, piece)) moves.push([x - 1, y])
     if (this.isPlaceEmpty(x, y + 1) && !this.isEnemyKingAround(x, y + 1, piece)) moves.push([x, y + 1])
@@ -165,6 +202,10 @@ export class TableChess {
     if (this.isPlaceEmpty(x + 1, y - 1) && !this.isEnemyKingAround(x + 1, y - 1, piece)) moves.push([x + 1, y - 1])
     if (this.isPlaceEmpty(x - 1, y + 1) && !this.isEnemyKingAround(x - 1, y + 1, piece)) moves.push([x - 1, y + 1])
 
+    if (!piece.isMoved) {
+      if (this.isPieceRook(x, y + 3) && !this.isPieceMoved(x, y + 3) && this.isPlaceEmpty(x, y + 2) && this.isPlaceEmpty(x, y + 1) && !this.isEnemyKingAround(x, y + 2, piece)) moves.push([x, y + 2])
+      if (this.isPieceRook(x, y - 4) && !this.isPieceMoved(x, y - 4) && this.isPlaceEmpty(x, y - 2) && this.isPlaceEmpty(x, y - 1) && this.isPlaceEmpty(x, y - 3) && !this.isEnemyKingAround(x, y - 2, piece)) moves.push([x, y - 2])
+    }
     return moves;
   }
   checkValidQueenMoves(x: number, y: number) {

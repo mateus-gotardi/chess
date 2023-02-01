@@ -5,6 +5,7 @@ export interface ChessPieces {
     name: ChessPieceName;
     color: ChessPieceColor;
     isAttacked: boolean;
+    isMoved: boolean;
 }
 
 export enum ChessPieceColor {
@@ -28,12 +29,14 @@ export class ChessPiece {
     color: string;
     id: string;
     name: string;
+    isMoved: boolean;
     
-    constructor({name, color, isAttacked}: ChessPieces) {
+    constructor({name, color, isAttacked, isMoved}: ChessPieces) {
         this.name = name; //string
         this.id = randomUUID() //string
         this.color = color; // string white | black
         this.isAttacked = isAttacked; // boolean
+        this.isMoved = isMoved; // boolean
     }
 }
 
