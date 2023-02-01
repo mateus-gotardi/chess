@@ -3,10 +3,10 @@ import { NewTable } from "./create-game";
 import { TableChess } from "./table-chess";
 let TABLE: TableChess;
 
-describe('test valid moves of all pieces at the beginning', ()=>{
+describe('test valid moves of all pieces at the beginning', () => {
     const table = NewTable();
     TABLE = new TableChess(table)
-    it('should test rook moves', ()=>{
+    it('should test rook moves', () => {
         const leftWhiteRook = TABLE.checkValidMoves(0, 0)
         expect(leftWhiteRook).toEqual([])
         const rightWhiteRook = TABLE.checkValidMoves(0, 7)
@@ -36,7 +36,7 @@ describe('test valid moves of all pieces at the beginning', ()=>{
         const rightBlackBishop = TABLE.checkValidMoves(7, 5)
         expect(rightBlackBishop).toEqual([])
     })
-    it ('should test Queen moves', () => {
+    it('should test Queen moves', () => {
         const whiteQueen = TABLE.checkValidMoves(0, 3)
         expect(whiteQueen).toEqual([])
         const blackQueen = TABLE.checkValidMoves(7, 3)
@@ -99,6 +99,7 @@ describe('test some moves of the pieces', () => {
     })
 
     it('should pawn kill a piece', () => {
+        expect(TABLE.getPiece(3, 2).isBlackAttacked).toEqual(true)
         TABLE.movePiece(4, 3, 3, 2)
         expect(TABLE.getTurn()).toEqual(ChessPieceColor.WHITE)
         expect(TABLE.getPiece(3, 2).name).toEqual(ChessPieceName.PAWN)
@@ -108,6 +109,7 @@ describe('test some moves of the pieces', () => {
 
     it('should test pawn moves pass kill', () => {
         TABLE.movePiece(1, 1, 3, 1)
+        expect(TABLE.getPiece(2, 1).isBlackAttacked).toEqual(true)
         TABLE.movePiece(3, 2, 2, 1)
         expect(TABLE.getTurn()).toEqual(ChessPieceColor.WHITE)
         expect(TABLE.getPiece(1, 1).name).toEqual(ChessPieceName.EMPTY)

@@ -6,49 +6,57 @@ export function NewTable() {
       new ChessPiece({
         name: ChessPieceName.ROOK,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.KNIGHT,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.BISHOP,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.QUEEN,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.KING,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.BISHOP,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.KNIGHT,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.ROOK,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
     ],
@@ -57,49 +65,57 @@ export function NewTable() {
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.WHITE,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
     ],
@@ -108,99 +124,57 @@ export function NewTable() {
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
-        isMoved: false
-      }),
-    ],
-    [
-      new ChessPiece({
-        name: ChessPieceName.EMPTY,
-        color: ChessPieceColor.NULL,
-        isAttacked: false,
-        isMoved: false
-      }),
-      new ChessPiece({
-        name: ChessPieceName.EMPTY,
-        color: ChessPieceColor.NULL,
-        isAttacked: false,
-        isMoved: false
-      }),
-      new ChessPiece({
-        name: ChessPieceName.EMPTY,
-        color: ChessPieceColor.NULL,
-        isAttacked: false,
-        isMoved: false
-      }),
-      new ChessPiece({
-        name: ChessPieceName.EMPTY,
-        color: ChessPieceColor.NULL,
-        isAttacked: false,
-        isMoved: false
-      }),
-      new ChessPiece({
-        name: ChessPieceName.EMPTY,
-        color: ChessPieceColor.NULL,
-        isAttacked: false,
-        isMoved: false
-      }),
-      new ChessPiece({
-        name: ChessPieceName.EMPTY,
-        color: ChessPieceColor.NULL,
-        isAttacked: false,
-        isMoved: false
-      }),
-      new ChessPiece({
-        name: ChessPieceName.EMPTY,
-        color: ChessPieceColor.NULL,
-        isAttacked: false,
-        isMoved: false
-      }),
-      new ChessPiece({
-        name: ChessPieceName.EMPTY,
-        color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
     ],
@@ -208,49 +182,57 @@ export function NewTable() {
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
     ],
@@ -258,49 +240,115 @@ export function NewTable() {
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.EMPTY,
         color: ChessPieceColor.NULL,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
+        isMoved: false
+      }),
+    ],
+    [
+      new ChessPiece({
+        name: ChessPieceName.EMPTY,
+        color: ChessPieceColor.NULL,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
+        isMoved: false
+      }),
+      new ChessPiece({
+        name: ChessPieceName.EMPTY,
+        color: ChessPieceColor.NULL,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
+        isMoved: false
+      }),
+      new ChessPiece({
+        name: ChessPieceName.EMPTY,
+        color: ChessPieceColor.NULL,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
+        isMoved: false
+      }),
+      new ChessPiece({
+        name: ChessPieceName.EMPTY,
+        color: ChessPieceColor.NULL,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
+        isMoved: false
+      }),
+      new ChessPiece({
+        name: ChessPieceName.EMPTY,
+        color: ChessPieceColor.NULL,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
+        isMoved: false
+      }),
+      new ChessPiece({
+        name: ChessPieceName.EMPTY,
+        color: ChessPieceColor.NULL,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
+        isMoved: false
+      }),
+      new ChessPiece({
+        name: ChessPieceName.EMPTY,
+        color: ChessPieceColor.NULL,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
+        isMoved: false
+      }),
+      new ChessPiece({
+        name: ChessPieceName.EMPTY,
+        color: ChessPieceColor.NULL,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
     ],
@@ -309,49 +357,57 @@ export function NewTable() {
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.PAWN,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
     ],
@@ -360,49 +416,57 @@ export function NewTable() {
       new ChessPiece({
         name: ChessPieceName.ROOK,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.KNIGHT,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.BISHOP,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.QUEEN,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.KING,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.BISHOP,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.KNIGHT,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
       new ChessPiece({
         name: ChessPieceName.ROOK,
         color: ChessPieceColor.BLACK,
-        isAttacked: false,
+        isWhiteAttacked: false,
+        isBlackAttacked: false,
         isMoved: false
       }),
     ],

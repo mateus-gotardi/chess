@@ -4,7 +4,8 @@ import { randomUUID } from "crypto";
 export interface ChessPieces {
     name: ChessPieceName;
     color: ChessPieceColor;
-    isAttacked: boolean;
+    isWhiteAttacked: boolean,
+    isBlackAttacked: boolean,
     isMoved: boolean;
 }
 
@@ -25,17 +26,19 @@ export enum ChessPieceName {
 }
 
 export class ChessPiece {
-    isAttacked: boolean;
+    isWhiteAttacked: boolean;
+    isBlackAttacked: boolean;
     color: string;
     id: string;
     name: string;
     isMoved: boolean;
     
-    constructor({name, color, isAttacked, isMoved}: ChessPieces) {
+    constructor({name, color, isMoved, isWhiteAttacked, isBlackAttacked }: ChessPieces) {
         this.name = name; //string
         this.id = randomUUID() //string
         this.color = color; // string white | black
-        this.isAttacked = isAttacked; // boolean
+        this.isWhiteAttacked = isWhiteAttacked; // boolean
+        this.isBlackAttacked = isBlackAttacked; // boolean
         this.isMoved = isMoved; // boolean
     }
 }
