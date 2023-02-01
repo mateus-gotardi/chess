@@ -52,22 +52,73 @@ export class TableChess {
       for (let y = 0; y < 8; y++) {
         const piece = this.getPiece(x, y);
         if (piece.color !== ChessPieceColor.NULL) {
-          const validMoves = this.checkValidMoves(x, y);
-          validMoves.forEach((move) => {
-            const attackedPiece = this.getPiece(move[0], move[1]);
-            if (piece.color === ChessPieceColor.WHITE) {
-              attackedPiece.isWhiteAttacked = true;
-            } else if (piece.color === ChessPieceColor.BLACK) {
-              attackedPiece.isBlackAttacked = true;
-            }
-            if (attackedPiece.name === ChessPieceName.KING && attackedPiece.color !== piece.color) {
-              if (attackedPiece.color === ChessPieceColor.WHITE) {
-                this.whiteChecked = true;
-              } else {
-                this.blackChecked = true;
+          if (piece.name === ChessPieceName.PAWN) {
+            if (piece.color === ChessPieceColor.BLACK) {
+              if (x - 1 >= 0 && y - 1 >= 0) {
+                const attackedPiece = this.getPiece(x - 1, y - 1)
+                attackedPiece.isBlackAttacked = true;
+                if (attackedPiece.name === ChessPieceName.KING && attackedPiece.color !== piece.color) {
+                  if (attackedPiece.color === ChessPieceColor.WHITE) {
+                    this.whiteChecked = true;
+                  } else {
+                    this.blackChecked = true;
+                  }
+                }
+              }
+              if (x - 1 >= 0 && y + 1 < 8) {
+                const attackedPiece = this.getPiece(x - 1, y + 1)
+                attackedPiece.isBlackAttacked = true;
+                if (attackedPiece.name === ChessPieceName.KING && attackedPiece.color !== piece.color) {
+                  if (attackedPiece.color === ChessPieceColor.WHITE) {
+                    this.whiteChecked = true;
+                  } else {
+                    this.blackChecked = true;
+                  }
+                }
+              }
+            } else if (piece.color === ChessPieceColor.WHITE) {
+              if (x + 1 < 8 && y - 1 >= 0) {
+                const attackedPiece = this.getPiece(x + 1, y - 1)
+                attackedPiece.isWhiteAttacked = true;
+                if (attackedPiece.name === ChessPieceName.KING && attackedPiece.color !== piece.color) {
+                  if (attackedPiece.color === ChessPieceColor.WHITE) {
+                    this.whiteChecked = true;
+                  } else {
+                    this.blackChecked = true;
+                  }
+                }
+              }
+              if (x + 1 < 8 && y + 1 < 8) {
+                const attackedPiece = this.getPiece(x + 1, y + 1)
+                attackedPiece.isWhiteAttacked = true;
+                if (attackedPiece.name === ChessPieceName.KING && attackedPiece.color !== piece.color) {
+                  if (attackedPiece.color === ChessPieceColor.WHITE) {
+                    this.whiteChecked = true;
+                  } else {
+                    this.blackChecked = true;
+                  }
+                }
               }
             }
-          });
+          } else {
+            const validMoves = this.checkValidMoves(x, y);
+            validMoves.forEach((move) => {
+              const attackedPiece = this.getPiece(move[0], move[1]);
+              if (piece.color === ChessPieceColor.WHITE) {
+                attackedPiece.isWhiteAttacked = true;
+              } else if (piece.color === ChessPieceColor.BLACK) {
+                attackedPiece.isBlackAttacked = true;
+              }
+              if (attackedPiece.name === ChessPieceName.KING && attackedPiece.color !== piece.color) {
+                if (attackedPiece.color === ChessPieceColor.WHITE) {
+                  this.whiteChecked = true;
+                } else {
+                  this.blackChecked = true;
+                }
+              }
+            });
+          }
+
         }
       }
     }

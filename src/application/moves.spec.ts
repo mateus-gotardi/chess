@@ -6,6 +6,24 @@ let TABLE: TableChess;
 describe('test valid moves of all pieces at the beginning', () => {
     const table = NewTable();
     TABLE = new TableChess(table)
+    it ('should be checking attacked', () => {
+        expect(TABLE.getPiece(2, 0).isWhiteAttacked).toBeTruthy()
+        expect(TABLE.getPiece(2, 1).isWhiteAttacked).toBeTruthy()
+        expect(TABLE.getPiece(2, 2).isWhiteAttacked).toBeTruthy()
+        expect(TABLE.getPiece(2, 3).isWhiteAttacked).toBeTruthy()
+        expect(TABLE.getPiece(2, 4).isWhiteAttacked).toBeTruthy()
+        expect(TABLE.getPiece(2, 5).isWhiteAttacked).toBeTruthy()
+        expect(TABLE.getPiece(2, 6).isWhiteAttacked).toBeTruthy()
+        expect(TABLE.getPiece(2, 7).isWhiteAttacked).toBeTruthy()
+        expect(TABLE.getPiece(5, 0).isBlackAttacked).toBeTruthy()
+        expect(TABLE.getPiece(5, 1).isBlackAttacked).toBeTruthy()
+        expect(TABLE.getPiece(5, 2).isBlackAttacked).toBeTruthy()
+        expect(TABLE.getPiece(5, 3).isBlackAttacked).toBeTruthy()
+        expect(TABLE.getPiece(5, 4).isBlackAttacked).toBeTruthy()
+        expect(TABLE.getPiece(5, 5).isBlackAttacked).toBeTruthy()
+        expect(TABLE.getPiece(5, 6).isBlackAttacked).toBeTruthy()
+        expect(TABLE.getPiece(5, 7).isBlackAttacked).toBeTruthy()
+    })
     it('should test rook moves', () => {
         const leftWhiteRook = TABLE.checkValidMoves(0, 0)
         expect(leftWhiteRook).toEqual([])
